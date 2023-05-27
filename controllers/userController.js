@@ -125,9 +125,11 @@ const login = async (req, res) => {
         throw new Error('Usuário não encontrado. Verifique o e-mail e a senha.');
       }
   
+      // Obtenha o primeiro documento retornado pela consulta
       const userDocument = querySnapshot.docs[0];
       const userData = userDocument.data();
   
+      // Verifique a senha
       if (userData.senha !== senha) {
         throw new Error('Senha incorreta. Verifique o e-mail e a senha.');
       }
@@ -136,16 +138,19 @@ const login = async (req, res) => {
       req.session.userId = userDocument.id;
   
       // Retornar as informações do usuário para o front-end
-      const responseData = {
-        _id: userDocument.id,
-        level: userData.level,
-        name: userData.name,
-        email: userData.email
+      const data = {
+        user:{
+            _id: userDocument.id,
+            level: userData.level,
+            name: userData.name,
+            email: userData.email
+        }
+       
       };
   
-      res.status(200).json(responseData);
+      res.send(data);
     } catch (error) {
-      res.status(401).json({ error: error.message });
+      res.status(401).send(error.message);
     }
 }
 
