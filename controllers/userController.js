@@ -5,7 +5,7 @@ const firestore = firebase.firestore();
 
 const addUser = async (req, res) => {
     try {
-      const {  email } = req.body;
+      const { email } = req.body;
   
       // Verificar se o e-mail já está em uso
       const snapshot = await firestore
@@ -112,40 +112,40 @@ const getUserByEmail = async (email) => {
 
 const login = async (req, res) => {
     try {
-        const { email, senha } = req.body;
-    
-        // Consulte o Firestore para obter o usuário com base no e-mail
-        const querySnapshot = await firestore
-          .collection('Users')
-          .where('email', '==', email)
-          .limit(1)
-          .get();
-    
-        if (querySnapshot.empty) {
-          throw new Error('Usuário não encontrado. Verifique o e-mail e a senha.');
-        }
-    
-        // Obtenha o primeiro documento retornado pela consulta
-        const userDocument = querySnapshot.docs[0];
-        const userData = userDocument.data();
-    
-        // Verifique a senha
-        if (userData.senha !== senha) {
-          throw new Error('Senha incorreta. Verifique o e-mail e a senha.');
-        }
-    
-        // Retornar as informações do usuário para o front-end
-        const responseData = {
-          _id: userDocument.id,
-          level: userData.level,
-          name: userData.name,
-          email: userData.email,
-        };
-    
-
-        res.status(200).json(responseData);
+      const { email, senha } = req.body;
+  
+      // Consulte o Firestore para obter o usuário com base no e-mail
+      const querySnapshot = await firestore
+        .collection('Users')
+        .where('email', '==', email)
+        .limit(1)
+        .get();
+  
+      if (querySnapshot.empty) {
+        throw new Error('Usuário não encontrado. Verifique o e-mail e a senha.');
+      }
+  
+      const userDocument = querySnapshot.docs[0];
+      const userData = userDocument.data();
+  
+      if (userData.senha !== senha) {
+        throw new Error('Senha incorreta. Verifique o e-mail e a senha.');
+      }
+  
+      // Armazenar o ID do usuário na sessão
+      req.session.userId = userDocument.id;
+  
+      // Retornar as informações do usuário para o front-end
+      const responseData = {
+        _id: userDocument.id,
+        level: userData.level,
+        name: userData.name,
+        email: userData.email
+      };
+  
+      res.status(200).json(responseData);
     } catch (error) {
-        res.status(401).json({ error: error.message });
+      res.status(401).json({ error: error.message });
     }
 }
 
