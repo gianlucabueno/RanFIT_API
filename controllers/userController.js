@@ -31,12 +31,12 @@ const addUser = async (req, res) => {
 const getAllUsers = async(req,res) => {
     try {
         const users = await firestore.collection('Users');
-        const data = await users.get();
+        const datas = await users.get();
         const usersArray = [];
-        if(data.empty) {
+        if(datas.empty) {
             res.status(404).send('No user record found');
         }else {
-            data.forEach(doc => {
+            datas.forEach(doc => {
                 const user = new User(
                     doc.id,
                     doc.data().name,
