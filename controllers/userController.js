@@ -172,7 +172,7 @@ const login = async (req, res) => {
       const userData = userDocument.data();
   
       // Verifique a senha
-      if (userData.senha !== senha) {
+      if (userData.password !== senha) {
         throw new Error('Senha incorreta. Verifique o e-mail e a senha.');
       }
   
