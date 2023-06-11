@@ -43,6 +43,7 @@ const getAllUsers = async(req,res) => {
                     doc.data().email,
                     doc.data().level
                 );
+                if (user.level != "admin")
                 usersArray.push(user);
             });
 
