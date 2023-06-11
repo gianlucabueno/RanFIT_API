@@ -28,7 +28,7 @@ const getUserExercise = async (req, res) => {
     console.log('Valor de userId:', userId);
     try {
       const collectionRef = firestore.collection('Exercises');
-      const query = collectionRef.where('UserId', '==', userId);
+      const query = collectionRef.where('userId', '==', userId);
       const querySnapshot = await query.get();
       
   
