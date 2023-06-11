@@ -1,10 +1,12 @@
 const firebase = require('../db');
 const Exercise= require('../models/exercise');
 const firestore = firebase.firestore();
+const exerciseService = require('../services/exerciseService')
 
 
 const addExercise = async (req, res) => {
-    const points = Math.floor(Math.random() * 100);
+  const { distance, duration } = req.body
+    const points = exerciseService.calculatePoints(distance,duration );
   
     try {
   

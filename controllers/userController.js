@@ -52,6 +52,7 @@ const getAllUsers = async(req,res) => {
               users:usersArray
             }
           }
+
           res.send(data);
         }
     } catch (error) {
