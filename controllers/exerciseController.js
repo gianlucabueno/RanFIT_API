@@ -8,9 +8,9 @@ const addExercise = async (req, res) => {
   
     try {
   
-      const data = { ...req.body, pointsPerExercise: points };
+      const body = { ...req.body, pointsPerExercise: points };
   
-      const exerciseRef = await firestore.collection('Exercises').add(data);
+      const exerciseRef = await firestore.collection('Exercises').add(body);
       const exerciseId = exerciseRef.id;
   
       res.send(`Registro salvo com sucesso com ID: ${exerciseId}`);
@@ -47,9 +47,9 @@ const getUserExercise = async (req, res) => {
 
 const updateExercise = async (req, res) => {
     try {
-        const data = req.body;
+        const body = req.body;
         const exercise = await firestore.collection('Exercises').doc(userId);
-        await exercise.update(data);
+        await exercise.update(body);
         res.send('User record updated successfuly');        
     } catch (error) {
         res.status(400).send(error.message);
