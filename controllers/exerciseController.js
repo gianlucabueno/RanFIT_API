@@ -21,7 +21,7 @@ const addExercise = async (req, res) => {
 
 
 const getUserExercise = async (req, res) => {
-    const userId = req.body.userId;
+    const { userId } = req.body
     try {
       const querySnapshot = await firestore
         .collection('Exercises')
