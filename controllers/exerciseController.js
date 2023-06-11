@@ -29,7 +29,7 @@ const getUserExercise = async (req, res) => {
         .get();
   
       if (querySnapshot.empty) {
-        res.status(404).send('User with the given ID not found');
+        res.status(404).send('Usuario não encontrado');
       } else {
         const exercises = [];
         querySnapshot.forEach((doc) => {
