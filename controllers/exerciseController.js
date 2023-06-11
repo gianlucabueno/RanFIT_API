@@ -27,7 +27,10 @@ const getUserExercise = async (req, res) => {
     const { userId } = req.body
     console.log('Valor de userId:', userId);
     try {
-      const querySnapshot = await firestore.collection('Exercises').where('idUser', '==', userId).get();
+      const collectionRef = firestore.collection('Exercises');
+      const query = collectionRef.where('idUser', '==', userId);
+      const querySnapshot = await query.get();
+      
   
       if (querySnapshot.empty) {
         res.status(404).send('Usuario não encontrado');
