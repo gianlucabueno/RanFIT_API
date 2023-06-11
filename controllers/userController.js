@@ -33,7 +33,7 @@ const getAllUsers = async(req,res) => {
         const users = await firestore.collection('Users');
         const body = await users.get();
         const usersArray = [];
-        if(datas.empty) {
+        if(body.empty) {
             res.status(404).send('No user record found');
         }else {
           body.forEach(doc => {
@@ -48,7 +48,7 @@ const getAllUsers = async(req,res) => {
           });
 
           const data = {
-              users:{usersArray}
+              users:usersArray
           }
             
           res.send(data);
