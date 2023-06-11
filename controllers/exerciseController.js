@@ -57,8 +57,8 @@ const updateExercise = async (req, res) => {
 const deleteExercise = async (req, res) => {
     try {
         const id = req.params.id;
-        await firestore.collection('Users').doc(id).delete();
-        res.send('Record deleted successfuly');
+        await firestore.collection('Exercises').doc(id).delete();
+        res.send('Exercicio deletado com sucesso');
     } catch (error) {
         res.status(400).send(error.message);
     }
@@ -68,4 +68,5 @@ const deleteExercise = async (req, res) => {
 module.exports = {
     addExercise,
     getUserExercise,
+    deleteExercise,
 }
