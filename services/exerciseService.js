@@ -3,7 +3,7 @@ const calculatePoints = (distance, duration) => {
     const distanceInKm = parseFloat(distance) / 1000;
     const distanceMeters = parseFloat(distance)
 
-    const distancePoints = (distanceInKm * 100 ) + (distanceMeters + 10)
+    const distancePoints = (distanceInKm * 100 ) + (distanceMeters * 10)
 
     const durationParts = duration.split(':'); // Divide a string nos dois pontos
     const hours = parseInt(durationParts[0], 10); // Converte a parte das horas em um número inteiro

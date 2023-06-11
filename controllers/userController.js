@@ -18,7 +18,7 @@ const addUser = async (req, res) => {
         throw new Error('E-mail já cadastrado. Por favor, escolha outro.');
       }
   
-      const data = {...req.body, level: "goer",point:0};
+      const data = {...req.body, level: "goer",points:0};
       const userRef = await firestore.collection('Users').add(data);
 
   
@@ -59,6 +59,40 @@ const getAllUsers = async(req,res) => {
     } catch (error) {
         res.status(400).send(error.message);
     }
+}
+
+const getRanking = async(req,res) => {
+  try {
+      const users = await firestore.collection('Users');
+      const body = await users.get();
+      const usersArray = [];
+      if(body.empty) {
+          res.status(404).send('No user record found');
+      }else {
+        body.forEach(doc => {
+              const user = new User(
+                  doc.id,
+                  doc.data().name,
+                  doc.data().email,
+                  doc.data().level,
+                  doc.data().points
+              );
+              if (user.level != "admin")
+              usersArray.push(user);
+        });
+
+        const data = {
+          data:{
+            users:usersArray.sort((a,b)=> a.points - b.points)
+          }
+            
+        }
+          
+        res.send(data);
+      }
+  } catch (error) {
+      res.status(400).send(error.message);
+  }
 }
 
 const getUser = async (req, res) => {
@@ -176,6 +210,7 @@ module.exports = {
     addUser,
     getAllUsers,
     getUser,
+    getRanking,
     updateUser,
     deleteUser,
     getUserByEmail,
