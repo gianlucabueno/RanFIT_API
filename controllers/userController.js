@@ -31,12 +31,12 @@ const addUser = async (req, res) => {
 const getAllUsers = async(req,res) => {
     try {
         const users = await firestore.collection('Users');
-        const datas = await users.get();
+        const body = await users.get();
         const usersArray = [];
         if(datas.empty) {
             res.status(404).send('No user record found');
         }else {
-            datas.forEach(doc => {
+          body.forEach(doc => {
                 const user = new User(
                     doc.id,
                     doc.data().name,
@@ -45,13 +45,13 @@ const getAllUsers = async(req,res) => {
                 );
                 if (user.level != "admin")
                 usersArray.push(user);
-            });
+          });
 
-            const data = {
-              users:usersArray
-            }
+          const data = {
+              users:{usersArray}
+          }
             
-            res.send(data);
+          res.send(data);
         }
     } catch (error) {
         res.status(400).send(error.message);
