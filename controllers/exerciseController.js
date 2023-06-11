@@ -4,15 +4,11 @@ const firestore = firebase.firestore();
 
 
 const addExercise = async (req, res) => {
-    const userId = req.session.userId;
     const points = Math.floor(Math.random() * 100);
   
     try {
-      if (!userId) {
-        throw new Error('Usuário não autenticado. Faça login para adicionar exercícios.');
-      }
   
-      const data = { ...req.body, idUser: userId, pointsPerExercise: points };
+      const data = { ...req.body, pointsPerExercise: points };
   
       const exerciseRef = await firestore.collection('Exercises').add(data);
       const exerciseId = exerciseRef.id;
@@ -25,7 +21,7 @@ const addExercise = async (req, res) => {
 
 
 const getUserExercise = async (req, res) => {
-    const userId = req.session.userId;
+    const userId = req.body.userId;
     try {
       const querySnapshot = await firestore
         .collection('Exercises')

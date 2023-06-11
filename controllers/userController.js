@@ -45,7 +45,12 @@ const getAllUsers = async(req,res) => {
                 );
                 usersArray.push(user);
             });
-            res.send(usersArray);
+
+            const data = {
+              users:usersArray
+            }
+            
+            res.send(data);
         }
     } catch (error) {
         res.status(400).send(error.message);
