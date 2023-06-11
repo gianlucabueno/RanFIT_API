@@ -48,7 +48,7 @@ const getAllUsers = async(req,res) => {
           });
 
           const data = {
-              users:usersArray
+              users:{usersArray}
           }
             
           res.send(data);
