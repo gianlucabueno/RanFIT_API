@@ -51,9 +51,7 @@ const getAllUsers = async(req,res) => {
             data:{
               users:usersArray
             }
-              
           }
-            
           res.send(data);
         }
     } catch (error) {

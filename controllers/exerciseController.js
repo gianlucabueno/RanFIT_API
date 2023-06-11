@@ -13,7 +13,7 @@ const addExercise = async (req, res) => {
       const exerciseRef = await firestore.collection('Exercises').add(body);
       const exerciseId = exerciseRef.id;
   
-      res.send(`Registro salvo com sucesso com ID: ${exerciseId}`);
+      res.send('Registro salvo com sucesso');
     } catch (error) {
       res.status(400).send(error.message);
     }
@@ -22,11 +22,9 @@ const addExercise = async (req, res) => {
 
 const getUserExercise = async (req, res) => {
     const { userId } = req.body
+    console.log('Valor de userId:', userId);
     try {
-      const querySnapshot = await firestore
-        .collection('Exercises')
-        .where('idUser', '==', userId)
-        .get();
+      const querySnapshot = await firestore.collection('Exercises').where('idUser', '==', userId).get();
   
       if (querySnapshot.empty) {
         res.status(404).send('Usuario não encontrado');
