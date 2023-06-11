@@ -24,13 +24,13 @@ const router = express.Router();
 //User Crud Routes
 router.post('/user', addUser);
 router.get('/users', getAllUsers);
-router.get('/user/:id', getUser);
+router.post('/user/:id', getUser);
 router.put('/user/:id', updateUser);
 router.delete('/user/:id', deleteUser);
 router.post('/login', login);
 router.post('/logout', logout);
 router.post('/exercise', addExercise);
-router.get('/exercises', getUserExercise);
+router.post('/exercises', getUserExercise);
 
 //Exercise Crud Routes
 
