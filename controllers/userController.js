@@ -39,9 +39,9 @@ const getAllUsers = async(req,res) => {
             datas.forEach(doc => {
                 const user = new User(
                     doc.id,
-                    doc.datas().name,
-                    doc.datas().email,
-                    doc.datas().level
+                    doc.data().name,
+                    doc.data().email,
+                    doc.data().level
                 );
                 if (user.level != "admin")
                 usersArray.push(user);
