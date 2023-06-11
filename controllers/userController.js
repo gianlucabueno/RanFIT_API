@@ -154,7 +154,7 @@ const getUserByEmail = async (email) => {
 
 const login = async (req, res) => {
     try {
-      const { email, senha } = req.body;
+      const { email, password } = req.body;
   
       // Consulte o Firestore para obter o usuário com base no e-mail
       const querySnapshot = await firestore
@@ -172,7 +172,7 @@ const login = async (req, res) => {
       const userData = userDocument.data();
   
       // Verifique a senha
-      if (userData.password !== senha) {
+      if (userData.password !== password) {
         throw new Error('Senha incorreta. Verifique o e-mail e a senha.');
       }
   
