@@ -87,7 +87,8 @@ const getRanking = async(req,res) => {
           }
             
         }
-          
+        console.log("body: ",body)
+        console.log("userArray: ",rankingArray)
         res.send(data);
       }
   } catch (error) {
