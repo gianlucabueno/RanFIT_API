@@ -37,11 +37,12 @@ const getAllUsers = async(req,res) => {
             res.status(404).send('No user record found');
         }else {
           body.forEach(doc => {
+                const { name, email, level } = doc.data();
                 const user = new User(
                     doc.id,
-                    doc.data().name,
-                    doc.data().email,
-                    doc.data().level
+                    name,
+                    email,
+                    level
                 );
                 if (user.level != "admin")
                 usersArray.push(user);
@@ -80,7 +81,7 @@ const getRanking = async(req,res) => {
 
         const data = {
           data:{
-            ranking:rankingArray.sort((a,b)=> a.points - b.points)
+            ranking:usersArray.sort((a,b)=> a.points - b.points)
           }
             
         }
