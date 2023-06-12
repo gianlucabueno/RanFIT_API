@@ -45,7 +45,7 @@ const getUserExercise = async (req, res) => {
 
         const data = {
           data:{
-            exercises:exercise
+            exercises:exercises
           }
         }
         
@@ -61,7 +61,7 @@ const updateExercise = async (req, res) => {
         const body = req.body;
         const exercise = await firestore.collection('Exercises').doc(userId);
         await exercise.update(body);
-        res.send('User record updated successfuly');        
+        res.send('Exercicio atualizado com sucesso');        
     } catch (error) {
         res.status(400).send(error.message);
     }

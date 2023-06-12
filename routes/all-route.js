@@ -3,6 +3,7 @@ const {
     addUser, 
     getAllUsers, 
     getUser,
+    getRanking,
     updateUser,
     deleteUser,
     login,
@@ -31,7 +32,7 @@ router.post('/login', login);
 router.post('/logout', logout);
 router.post('/exercise', addExercise);
 router.post('/exercises', getUserExercise);
-
+router.post('/ranking', getRanking);
 //Exercise Crud Routes
 
 
