@@ -34,7 +34,7 @@ const getAllUsers = async(req,res) => {
         const body = await users.get();
         const usersArray = [];
         if(body.empty) {
-            res.status(404).send('No user record found');
+            res.status(404).send('Usuario não encontrado');
         }else {
           body.forEach(doc => {
                 const { name, email, level } = doc.data();
@@ -53,6 +53,7 @@ const getAllUsers = async(req,res) => {
               users:usersArray
             }
           }
+          console.log("body: ",body)
           console.log("userArray: ",usersArray)
           res.send(data);
         }
@@ -67,7 +68,7 @@ const getRanking = async(req,res) => {
       const body = await users.get();
       const rankingArray = [];
       if(body.empty) {
-          res.status(404).send('No user record found');
+          res.status(404).send('Usuario não encontrado');
       }else {
         body.forEach(doc => {
               const user = new User(
@@ -99,7 +100,7 @@ const getUser = async (req, res) => {
         const user = await firestore.collection('Users').doc(id);
         const data = await user.get();
         if(!data.exists) {
-            res.status(404).send('User with the given ID not found');
+            res.status(404).send('Usuario com esse ID não encontrado');
         }else {
             res.send(data.data());
         }
@@ -114,7 +115,7 @@ const updateUser = async (req, res) => {
         const data = req.body;
         const user =  await firestore.collection('Users').doc(id);
         await user.update(data);
-        res.send('User record updated successfuly');        
+        res.send('Usuario atualizado com sucesso');        
     } catch (error) {
         res.status(400).send(error.message);
     }
@@ -124,7 +125,7 @@ const deleteUser = async (req, res) => {
     try {
         const id = req.params.id;
         await firestore.collection('Users').doc(id).delete();
-        res.send('Record deleted successfuly');
+        res.send('Usuario deletado com sucesso');
     } catch (error) {
         res.status(400).send(error.message);
     }
