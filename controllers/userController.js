@@ -84,9 +84,13 @@ const getRanking = async(req,res) => {
 
         const data = {
           data:{
-            ranking:rankingArray.sort((a,b)=> b.points - a.points)
+            ranking:rankingArray.sort((a,b)=> b.points - a.points).map((item, index) => {
+              return {
+                ...item,
+                position: index + 1
+              }
+            })
           }
-            
         }
         console.log("body: ",body)
         console.log("userArray: ",rankingArray)
