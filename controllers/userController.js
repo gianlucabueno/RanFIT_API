@@ -84,7 +84,7 @@ const getRanking = async(req,res) => {
 
         const data = {
           data:{
-            ranking:rankingArray.sort((a,b)=> a.points - b.points)
+            ranking:rankingArray.sort((a,b)=> b.points - a.points)
           }
             
         }
