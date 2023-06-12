@@ -32,7 +32,7 @@ router.post('/login', login);
 router.post('/logout', logout);
 router.post('/exercise', addExercise);
 router.post('/exercises', getUserExercise);
-router.post('/ranking', getRanking);
+router.get('/ranking', getRanking);
 //Exercise Crud Routes
 
 
