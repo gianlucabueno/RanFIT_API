@@ -42,7 +42,14 @@ const getUserExercise = async (req, res) => {
           const exerciseWithId = { id: exerciseId, ...exerciseData };
           exercises.push(exerciseWithId);
         });
-        res.send(exercises);
+
+        const data = {
+          data:{
+            exercises:exercise
+          }
+        }
+        
+        res.send(data);
       }
     } catch (error) {
       res.status(400).send(error.message);
