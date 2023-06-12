@@ -38,13 +38,12 @@ const getAllUsers = async(req,res) => {
         }else {
           body.forEach(doc => {
                 const { name, email, level } = doc.data();
-                const user = new User(
-                    doc.id,
-                    name,
-                    email,
-                    level
-                );
-                if (user.level != "admin")
+                const user = new User();
+                user.id = doc.id;
+                user.name = name;
+                user.email = email;
+                user.level = level;
+                if ( level != "admin")
                 usersArray.push(user);
           });
 
