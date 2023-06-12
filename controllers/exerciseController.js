@@ -6,8 +6,8 @@ const exerciseService = require('../services/exerciseService')
 
 const addExercise = async (req, res) => {
   const { distance, duration } = req.body
-  //const points = exerciseService.calculatePoints(distance,duration );
-  const points = Math.floor(Math.random() * 100);
+  const points = exerciseService.calculatePoints(distance,duration);
+  //const points = Math.floor(Math.random() * 100);
   
     try {
   
