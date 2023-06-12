@@ -72,11 +72,11 @@ const getRanking = async(req,res) => {
       }else {
         body.forEach(doc => {
               const { name, points } = doc.data();
-              const user = new User(
-                  user.id = doc.id,
-                  user.name = name,
-                  user.points = points
-              );
+              const user = new User();
+              user.id = doc.id;
+              user.name = name;
+              user.points = points;
+              
               if (user.level != "admin")
               rankingArray.push(user);
         });
