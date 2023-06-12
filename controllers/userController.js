@@ -44,7 +44,7 @@ const getAllUsers = async(req,res) => {
                 user.email = email;
                 user.level = level;
                 if ( level != "admin")
-                usersArray.push(user);
+                  usersArray.push(user);
           });
 
           const data = {
