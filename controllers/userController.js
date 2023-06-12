@@ -71,10 +71,11 @@ const getRanking = async(req,res) => {
           res.status(404).send('Usuario não encontrado');
       }else {
         body.forEach(doc => {
+              const { name, points } = doc.data();
               const user = new User(
                   doc.id,
-                  doc.data().name,
-                  doc.data().points
+                  name,
+                  points
               );
               if (user.level != "admin")
               rankingArray.push(user);
