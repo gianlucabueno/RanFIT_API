@@ -64,7 +64,7 @@ const getRanking = async(req,res) => {
   try {
       const users = await firestore.collection('Users');
       const body = await users.get();
-      const usersArray = [];
+      const rankingArray = [];
       if(body.empty) {
           res.status(404).send('No user record found');
       }else {
@@ -72,17 +72,15 @@ const getRanking = async(req,res) => {
               const user = new User(
                   doc.id,
                   doc.data().name,
-                  doc.data().email,
-                  doc.data().level,
                   doc.data().points
               );
               if (user.level != "admin")
-              usersArray.push(user);
+              rankingArray.push(user);
         });
 
         const data = {
           data:{
-            users:usersArray.sort((a,b)=> a.points - b.points)
+            ranking:rankingArray.sort((a,b)=> a.points - b.points)
           }
             
         }
